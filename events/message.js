@@ -134,18 +134,6 @@ module.exports = {
                 else await message.member.roles.add(role.id);
             }
 
-            if (user.level == 150) {
-                let role = message.guild.roles.cache.find(role => role.name == "Level 150");
-                if (!role) await message.guild.roles.create({
-                    data: {
-                        name: "Level 150",
-                        color: "RED",
-                    }
-                }).catch(err => console.log(err));
-                role = message.guild.roles.cache.find(role => role.name == "Level 150");
-                if (message.member.roles.cache.has(role.id)) return;
-                else await message.member.roles.add(role.id);
-            }
         }
 
         if (await Afk.findOne * ({ userID: message.author.id })) {
