@@ -9,6 +9,20 @@ require('discord-buttons')(client);
 Levels.setURL(`mongodb+srv://discordbot:${process.env.PASS}@bot.svvb1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
 client.commands = new Discord.Collection();
 
+client.on("ready", () => {
+    client.user.setActivity('discord.js', { type: 'WATCHING'});
+
+    const activities = [
+        `${client.guilds.cache.size} servers!`,
+        `${client.channels.cache.size} channels!`,
+        `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} users!`
+    ];
+
+    let i = 0;
+    setInterval(() => client.user.setActivity(`${prefix}help | ${activities[i++ % activities.length ]}`, { type: 'WATCHING'}), 15000);
+
+});
+
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
